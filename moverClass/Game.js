@@ -18,10 +18,15 @@
 	// spritesheet object
 	var spriteSheet = null;
 	// game objects
-	var snake = null;
-	var bug = null;
-	var snakeMover = null;
-	var bugMover = null;
+	var snake1 = null;
+	var bug1 = null;
+	var snakeMover1 = null;
+	var bugMover1 = null;
+
+	var snake2 = null;
+	var bug2 = null;
+	var snakeMover2 = null;
+	var bugMover2 = null;
 
 	// spritesheet data object
 	var data = {
@@ -167,30 +172,50 @@
 		console.log(">> adding sprites to game");
 		spriteSheet.removeEventListener("complete", onReady);
 
-		// construct game object sprites
+		// construct snake sprites and movers
 		snake1 = new createjs.Sprite(spriteSheet);
 		snake1.x = 250;
 		snake1.y = 250;
 		snake1.gotoAndStop("snakeAlive");
 		stage.addChild(snake1);
+		snakeMover1 = new Mover(snake1, stage);
+		snakeMover1.setSpeed(6);
+		snakeMover1.startMe();
+		snakeMover1.setDirection(1)
 
-		// construct the Mover object and pass in sprite/stage
-		snakeMover = new Mover(snake, stage);
-		snakeMover.setSpeed(6);
-		snakeMover.startMe();
-
-		bug = new createjs.Sprite(spriteSheet);
-		bug.x = 100;
-		bug.y = 100;
-		bug.gotoAndStop("bugAlive");
-		stage.addChild(bug);
-		bugMover = new Mover(bug, stage);
-		bugMover.startMe();
+		snake2 = new createjs.Sprite(spriteSheet);
+		snake2.x = 250;
+		snake2.y = 150;
+		snake2.gotoAndStop("snakeAlive");
+		stage.addChild(snake2);
+		snakeMover2 = new Mover(snake2, stage);
+		snakeMover2.setSpeed(6);
+		snakeMover2.startMe();
+		snakeMover2.setDirection(2)
 
 
+		// Construct bug sprites and movers
+		bug1 = new createjs.Sprite(spriteSheet);
+		bug1.x = 100;
+		bug1.y = 100;
+		bug1.gotoAndStop("bugAlive");
+		stage.addChild(bug1);
+		bugMover1 = new Mover(bug1, stage);
+		bugMover1.startMe();
+		bugMover1.setDirection(3)
 
 
-		console.log("is bug moving? " + bugMover.getMoving());
+		bug2 = new createjs.Sprite(spriteSheet);
+		bug2.x = 100;
+		bug2.y = 350;
+		bug2.gotoAndStop("bugAlive");
+		stage.addChild(bug2);
+		bugMover2 = new Mover(bug2, stage);
+		bugMover2.startMe();
+		bugMover2.setDirection(4)
+
+
+		console.log("is bug moving? " + bugMover1.getMoving());
 		console.log(">> game ready");
 
 	}
@@ -200,8 +225,10 @@
 		document.getElementById("fps").innerHTML = createjs.Ticker.getMeasuredFPS();
 
 		// game loop code here
-		snakeMover.updateMe();
-		bugMover.updateMe();
+		snakeMover1.updateMe();
+		snakeMover2.updateMe()
+		bugMover1.updateMe();
+		bugMover2.updateMe()
 
 		// update the stage!
 		stage.update();
