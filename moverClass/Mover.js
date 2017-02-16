@@ -35,36 +35,47 @@ function Mover(sprite, stage) {
 
     this.updateMe = function () {
         if (moving == true) {
-            // Declaring the width and height of the canvas as global vars
+            // Declaring the width and height of the canvas as global variabless
             var width = stage.canvas.width
             var height = stage.canvas.height
             // Set rotation based on the direction property
             sprite.rotation = (direction*90)
             // 1 = up, 2 = right, 3 = down, 4 = left (clockwise rotation)
-            // move the sprite up
+            // Move the sprite up
+            // if the direction is set to one
             if (direction == 1) {
+                // Move up vertically based on the speed variable
                 sprite.y = sprite.y - speed
-                // Check if the sprite is offscreen
+                // Check if the sprite is over the top edge of the canvas
                 if (sprite.y < 0) {
+                    // Go to the opposite side of the screen (bottom edge)
                     sprite.y = height
                 }
+                // If the direction is set to 2
             } else if (direction == 2) {
+                // Move right based on the speed value
                 sprite.x = sprite.x + speed
-                // Check if the sprite is offscreen
+                // Check if the sprite is outside of the canvas's right edge
                 if (sprite.x > width) {
-                    console.log(sprite.getBounds().width)
+                    // Set x to the opposite side of the screen (left edge)
                     sprite.x = 0
                 }
+                // If the direction is set to three
             } else if (direction == 3) {
+                // Move down based on the speed value
                 sprite.y = sprite.y + speed
-                // Check if the sprite is offscreen
+                // Check if the sprite is under the canvas's bottom edge
                 if (sprite.y > height) {
+                    // Set y to the opposite side of the screen (top edge)
                     sprite.y = 0
                 }
+                // If the direction is set to four
             } else if (direction == 4) {
+                // Move left based on the speed
                 sprite.x = sprite.x - speed;
-                // is sprite off the stage?
+                // Check if the sprite is outside of the canvas's left edge
                 if (sprite.x < 0) {
+                    // Set x to the opposite side of the screen (right edge)
                     sprite.x = width;
                 }
             }
