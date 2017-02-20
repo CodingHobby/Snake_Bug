@@ -30,8 +30,13 @@ function Mover(sprite, stage) {
     this.startMe = function () {
         sprite.play();
         moving = true;
+        console.log("Moving: " + moving)
     };
-
+    this.stopMe = function () {
+        sprite.stop();
+        moving = false;
+        console.log("Moving: " + moving)
+    };
 
     this.updateMe = function () {
         if (moving == true) {
@@ -39,7 +44,7 @@ function Mover(sprite, stage) {
             var width = stage.canvas.width
             var height = stage.canvas.height
             // Set rotation based on the direction property
-            sprite.rotation = (direction*90)
+            sprite.rotation = (direction * 90)
             // 1 = up, 2 = right, 3 = down, 4 = left (clockwise rotation)
             // Move the sprite up
             // if the direction is set to one
@@ -84,9 +89,15 @@ function Mover(sprite, stage) {
 
     // Added event listener to stop sprite, also removed stopMe() function
     sprite.addEventListener("click", function () {
-        sprite.stop()
-        moving = false
-        console.log("Stopped")
+        if (moving) {
+            sprite.stop();
+            moving = false;
+            console.log("Moving: " + moving)
+        } else {
+            sprite.play();
+            moving = true;
+            console.log("Moving: " + moving)
+        }
     })
 
-};
+}
